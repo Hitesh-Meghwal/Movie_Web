@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:movieweb/screens/homeScreen.dart';
+import 'package:movieweb/utils/routes/goRouter.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized;
@@ -9,16 +10,13 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
         title: 'Movie Website',
-        theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-          useMaterial3: true,
-        ),
+        theme: ThemeData.dark(),
         debugShowCheckedModeBanner: false,
-        home: Homescreen());
+        routerConfig: Gorouter().router,
+                );
   }
 }
