@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:movieweb/widgets/customDrawer.dart';
 
 class Homescreen extends StatelessWidget {
   const Homescreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(
+      drawer: const Customdrawer(),
+      appBar: AppBar(),
+      body: Center(child: Text("HOMEPAGE")),
+    );
   }
 }
