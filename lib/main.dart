@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:movieweb/res/colors/appColors.dart';
-import 'package:movieweb/utils/routes/goRouter.dart';
+import 'package:movieweb/utils/routes/getRoutes.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -13,7 +14,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
+    return GetMaterialApp(
       title: 'Movie Website',
       theme: ThemeData(
         brightness: Brightness.dark, // Dark theme
@@ -54,7 +55,8 @@ class MyApp extends StatelessWidget {
         ),
       ),
       debugShowCheckedModeBanner: false,
-      routerConfig: Gorouter().router,
+      getPages: Getroutes.routes,
+      initialRoute: Getroutes.homeScreen,
     );
   }
 }
