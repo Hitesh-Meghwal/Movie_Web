@@ -20,33 +20,26 @@ class Customdrawer extends StatelessWidget {
             Text("MOvIe WEb",
                 style: Theme.of(context).textTheme.headlineMedium),
             const SizedBox(height: 15),
-            _buildTextButton(TextButton(
-                onPressed: () {
-                  Get.toNamed(Getroutes.homeScreen);
-                },
-                child: Text(
-                  Appstring.home,
-                  style: Theme.of(context).textTheme.bodyLarge,
-                ))),
+            _buildTextButton(context, () {
+              Get.toNamed(Getroutes.homeScreen);
+            }, Appstring.home),
             const SizedBox(height: 5),
-            _buildTextButton(
-              TextButton(
-                  onPressed: () {
-                    Get.toNamed(Getroutes.moiveScreen);
-                  },
-                  child: Text(Appstring.movies,
-                      style: Theme.of(context).textTheme.bodyLarge)),
-            )
+            _buildTextButton(context, () {
+              Get.toNamed(Getroutes.moiveScreen);
+            }, Appstring.movies)
           ],
         ),
       ),
     );
   }
 
-  Widget _buildTextButton(Widget child) {
+  Widget _buildTextButton(
+      BuildContext context, VoidCallback ontap, String label) {
     return SizedBox(
       width: double.infinity,
-      child: child,
+      child: TextButton(
+          onPressed: ontap,
+          child: Text(label, style: Theme.of(context).textTheme.bodyLarge)),
     );
   }
 }
