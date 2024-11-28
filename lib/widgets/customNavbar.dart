@@ -21,7 +21,7 @@ class Customnavbar extends StatelessWidget implements PreferredSizeWidget {
                       .copyWith(color: Colors.yellow))),
           const SizedBox(height: 10),
           SizedBox(
-            width: Get.width * 0.6,
+            width: Get.width * 0.55,
             height: 40,
             child: Container(
               decoration: BoxDecoration(
@@ -38,7 +38,7 @@ class Customnavbar extends StatelessWidget implements PreferredSizeWidget {
                     suffixIcon: IconButton(
                         onPressed: () {},
                         icon: const Icon(
-                          Icons.cancel,
+                          Icons.cancel, 
                           color: Colors.amber,
                         ))),
               ),
