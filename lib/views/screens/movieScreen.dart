@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:movieweb/widgets/customDrawer.dart';
+import 'package:movieweb/views/widgets/customDrawer.dart';
 
 class Moviescreen extends StatelessWidget {
   const Moviescreen({super.key});
