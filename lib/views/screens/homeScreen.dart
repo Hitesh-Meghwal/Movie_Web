@@ -17,20 +17,45 @@ class Homescreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            const SizedBox(height: 15),
             Padding(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                 child: Text(Appstring.topRatedMovies,
                     style: Theme.of(context).textTheme.bodyLarge)),
-            const Row(
+            Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Flexible(flex: 2, child: CarouselSkeleton()),
-                SizedBox(width: 20),
-                Flexible(child: NowplayingSkeleton())
+                const Flexible(
+                    flex: 2,
+                    child: Padding(
+                      padding: EdgeInsets.only(left: 16.0),
+                      child: CarouselSkeleton(),
+                    )),
+                const SizedBox(width: 20),
+                Flexible(
+                    child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 16, vertical: 8),
+                        child: Text(Appstring.nowPlaying,
+                            style: Theme.of(context).textTheme.bodyLarge)),
+                    const SizedBox(height: 10),
+                    const NowplayingSkeleton(),
+                  ],
+                ))
               ],
-            )
-          ],  
+            ),
+            const SizedBox(height: 15),
+            Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                child: Text(Appstring.explorePopularMovies,
+                    style: Theme.of(context).textTheme.bodyLarge)),
+            const SizedBox(height: 10),
+          ],
         ),
       ),
     );
