@@ -14,12 +14,12 @@ class NowplayingSkeleton extends StatelessWidget {
             itemBuilder: (context, index) {
               return ListTile(
                 leading: Container(
-                  color: Colors.grey,
+                  color: Colors.grey.shade800,
                   height: 120,
                   width: 80,
                 ),
-                title: Container(height: 20, color: Colors.grey),
-                subtitle: Container(height: 20, color: Colors.grey),
+                title: Container(height: 20, color: Colors.grey.shade800),
+                subtitle: Container(height: 20, color: Colors.grey.shade800),
               );
             }));
   }

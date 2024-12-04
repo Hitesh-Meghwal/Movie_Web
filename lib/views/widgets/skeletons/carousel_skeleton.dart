@@ -14,7 +14,7 @@ class CarouselSkeleton extends StatelessWidget {
                 return Container(
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(8),
-                    color: Colors.grey,
+                    color: Colors.grey.shade800,
                   ),
                 );
               });
