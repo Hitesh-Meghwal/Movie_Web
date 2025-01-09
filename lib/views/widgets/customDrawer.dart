@@ -16,7 +16,7 @@ class Customdrawer extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const SizedBox(height: 5),
-            Text("MOvIe WEb",
+            Text("CineScope",
                 style: Theme.of(context).textTheme.headlineMedium),
             const SizedBox(height: 15),
             _buildTextButton(context, () {
