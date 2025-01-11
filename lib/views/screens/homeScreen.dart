@@ -1,4 +1,7 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:movieweb/controller/movies_controller.dart';
 import 'package:movieweb/utils/appString/appString.dart';
 import 'package:movieweb/views/widgets/footer.dart';
 import 'package:movieweb/views/widgets/skeletons/carousel_skeleton.dart';
@@ -7,20 +10,10 @@ import 'package:movieweb/views/widgets/customNavbar.dart';
 import 'package:movieweb/views/widgets/skeletons/nowPlaying_skeleton.dart';
 import 'package:movieweb/views/widgets/skeletons/popularMovies_skeleton.dart';
 
-class Homescreen extends StatefulWidget {
-  const Homescreen({super.key});
+class Homescreen extends StatelessWidget {
+  Homescreen({super.key});
 
-  @override
-  State<Homescreen> createState() => _HomescreenState();
-}
-
-class _HomescreenState extends State<Homescreen> {
-
-  @override
-  void initState() {
-    super.initState();
-    
-  }
+  final MoviesController _moviesController = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -57,7 +50,7 @@ class _HomescreenState extends State<Homescreen> {
                         child: Text(Appstring.nowPlaying,
                             style: Theme.of(context).textTheme.bodyLarge)),
                     const SizedBox(height: 10),
-                    const NowplayingSkeleton(),
+                    _nowPlayingWidget(),
                   ],
                 ))
               ],
@@ -87,5 +80,45 @@ class _HomescreenState extends State<Homescreen> {
         ),
       ),
     );
+  }
+
+  Widget _nowPlayingWidget() {
+    return FutureBuilder(
+        future: _moviesController.getNowPlayingList(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(child: NowplayingSkeleton());
+          }
+          if (snapshot.hasError || snapshot.data == null) {
+            return Center(child: Text(_moviesController.errorMsg.value));
+          }
+          final nowPlayingList = snapshot.data;
+          return ListView.builder(
+              shrinkWrap: true,
+              physics: const AlwaysScrollableScrollPhysics(),
+              itemCount: nowPlayingList!.length,
+              itemBuilder: (context, index) {
+                final movies = nowPlayingList[index];
+                return ListTile(
+                  leading: Container(
+                    color: Colors.grey.shade800,
+                    height: 120,
+                    width: 80,
+                    child: CachedNetworkImage(
+                      imageUrl: movies.backdropPath,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                  title: Text(movies.title,
+                      style: Theme.of(context).textTheme.bodyMedium),
+                  subtitle: Text(
+                    movies.overview,
+                    style: Theme.of(context).textTheme.bodyMedium,
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                );
+              });
+        });
   }
 }

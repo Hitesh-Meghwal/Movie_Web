@@ -10,12 +10,15 @@ class MoviesController extends GetxController {
 
   RxString get errorMsg => _errorMsg;
 
-  Future<MovieModel?> getNowPlayingList() async {
+ Future<List<MovieModel>?> getNowPlayingList() async {
     try {
       final response =
           await _movieServices.getRequest(AppConstant.movieNowPlayingList);
-      if (response != null) {
-        return MovieModel.fromJson(response.results);
+      if (response != null && response.results is List) {
+        // Convert the list of results to a list of MovieModel objects
+        return response.results
+            .map<MovieModel>((json) => MovieModel.fromJson(json))
+            .toList();
       } else {
         _errorMsg.value = "Failed to fetch movies.";
         return null;
