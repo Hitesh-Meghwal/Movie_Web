@@ -7,8 +7,20 @@ import 'package:movieweb/views/widgets/customNavbar.dart';
 import 'package:movieweb/views/widgets/skeletons/nowPlaying_skeleton.dart';
 import 'package:movieweb/views/widgets/skeletons/popularMovies_skeleton.dart';
 
-class Homescreen extends StatelessWidget {
+class Homescreen extends StatefulWidget {
   const Homescreen({super.key});
+
+  @override
+  State<Homescreen> createState() => _HomescreenState();
+}
+
+class _HomescreenState extends State<Homescreen> {
+
+  @override
+  void initState() {
+    super.initState();
+    
+  }
 
   @override
   Widget build(BuildContext context) {

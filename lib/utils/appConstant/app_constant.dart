@@ -7,5 +7,6 @@ class AppConstant {
   };
 
   //endpoints
-  static const movieNowPlayingList = "/now_playing?language=en-US&page=1";
+  static const movieNowPlayingList =
+      "$BASE_URL/now_playing?language=en-US&page=1";
 }
