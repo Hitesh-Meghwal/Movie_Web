@@ -6,7 +6,11 @@ class AppConstant {
     'accept': 'application/json'
   };
 
+  static const imagePath = "https://image.tmdb.org/t/p/w500/";
+
   //endpoints
   static const movieNowPlayingList =
       "$BASE_URL/now_playing?language=en-US&page=1";
+  static const topRatedPlayingList =
+      "$BASE_URL/top_rated?language=en-US&page=1";
 }
