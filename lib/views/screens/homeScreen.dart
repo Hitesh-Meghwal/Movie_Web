@@ -60,20 +60,20 @@ class _HomescreenState extends State<Homescreen> {
                     )),
                 const SizedBox(width: 20),
                 Flexible(
-                    child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 16, vertical: 8),
-                        child: Text(Appstring.nowPlaying,
-                            style: Theme.of(context)
-                                .textTheme
-                                .bodyLarge!
-                                .copyWith(fontWeight: FontWeight.bold))),
-                    const SizedBox(height: 10),
-                    _nowPlayingWidget(context),
-                  ],
+                    child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(Appstring.nowPlaying,
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodyLarge!
+                              .copyWith(fontWeight: FontWeight.bold)),
+                      const SizedBox(height: 10),
+                      _nowPlayingWidget(context),
+                    ],
+                  ),
                 ))
               ],
             ),
@@ -118,52 +118,55 @@ class _HomescreenState extends State<Homescreen> {
 
       return _moviesController.isLoading.value
           ? const NowplayingSkeleton()
-          : ListView.builder(
-              shrinkWrap: true,
-              physics: const AlwaysScrollableScrollPhysics(),
-              itemCount: _moviesController.nowPlayingMovieList.length,
-              itemBuilder: (context, index) {
-                final movies = _moviesController.nowPlayingMovieList[index];
-                return ListTile(
-                  onTap: () {
-                    // Handle movie tap event
-                  },
-                  leading: SizedBox(
-                    height: 120,
-                    width: 80,
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(10),
-                      child: CachedNetworkImage(
-                        imageUrl:
-                            "${AppConstant.imagePath}${movies.backdropPath}",
-                        fit: BoxFit.cover,
-                        placeholder: (context, url) =>
-                            const CircularProgressIndicator(),
-                        errorWidget: (context, url, error) =>
-                            const Icon(Icons.error),
+          : SizedBox(
+              height: 500,
+              child: ListView.builder(
+                shrinkWrap: true,
+                physics: const AlwaysScrollableScrollPhysics(),
+                itemCount: _moviesController.nowPlayingMovieList.length,
+                itemBuilder: (context, index) {
+                  final movies = _moviesController.nowPlayingMovieList[index];
+                  return ListTile(
+                    onTap: () {
+                      // Handle movie tap event
+                    },
+                    leading: SizedBox(
+                      height: 120,
+                      width: 80,
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(10),
+                        child: CachedNetworkImage(
+                          imageUrl:
+                              "${AppConstant.imagePath}${movies.backdropPath}",
+                          fit: BoxFit.cover,
+                          placeholder: (context, url) =>
+                              const CircularProgressIndicator(),
+                          errorWidget: (context, url, error) =>
+                              const Icon(Icons.error),
+                        ),
                       ),
                     ),
-                  ),
-                  title: Text(
-                    movies.title,
-                    style: Theme.of(context)
-                        .textTheme
-                        .bodyLarge!
-                        .copyWith(color: Colors.yellow),
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                  subtitle: Text(
-                    movies.overview,
-                    style: Theme.of(context)
-                        .textTheme
-                        .bodyMedium!
-                        .copyWith(color: Colors.grey),
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                );
-              },
+                    title: Text(
+                      movies.title,
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodyLarge!
+                          .copyWith(color: Colors.yellow),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    subtitle: Text(
+                      movies.overview,
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodyMedium!
+                          .copyWith(color: Colors.grey),
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  );
+                },
+              ),
             );
     });
   }
