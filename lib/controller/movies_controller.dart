@@ -7,45 +7,53 @@ import 'package:movieweb/utils/appConstant/app_constant.dart';
 class MoviesController extends GetxController {
   final MovieServices _movieServices = MovieServices();
   final RxString _errorMsg = "".obs;
+  final RxBool _isLoading = false.obs;
+  final RxList<MovieModel> _nowPlayingMovieList = <MovieModel>[].obs;
+  final RxList<MovieModel> _topRatedMovieList = <MovieModel>[].obs;
 
   RxString get errorMsg => _errorMsg;
+  RxBool get isLoading => _isLoading;
+  RxList<MovieModel> get nowPlayingMovieList => _nowPlayingMovieList;
+  RxList<MovieModel> get topRatedMovieList => _topRatedMovieList;
 
-  Future<List<MovieModel>?> getNowPlayingList() async {
+  Future<void> getNowPlayingMovies() async {
+    _isLoading.value = true;
     try {
       final response =
           await _movieServices.getRequest(AppConstant.movieNowPlayingList);
       if (response != null && response.results is List) {
         // Convert the list of results to a list of MovieModel objects
-        return response.results
+        _nowPlayingMovieList.value = response.results
             .map<MovieModel>((json) => MovieModel.fromJson(json))
             .toList();
       } else {
         _errorMsg.value = "Failed to fetch movies.";
-        return null;
       }
     } catch (e) {
       _errorMsg.value = "Failed to fetch movies.";
       debugPrint('Error: $e');
-      return null;
+    } finally {
+      _isLoading.value = false;
     }
   }
 
-  Future<List<MovieModel>?> getTopRatedMovies() async {
+  Future<void> getTopRatedMovies() async {
+    _isLoading.value = true;
     try {
       final response =
           await _movieServices.getRequest(AppConstant.topRatedPlayingList);
       if (response != null && response.results is List) {
-        return response.results
+        _topRatedMovieList.value = response.results
             .map<MovieModel>((json) => MovieModel.fromJson(json))
             .toList();
       } else {
         _errorMsg.value = "Failed to fetch top rated movies.";
-        return null;
       }
     } catch (e) {
       _errorMsg.value = "Failed to fetch top rated movies.";
       debugPrint('Error: $e');
-      return null;
+    } finally {
+      _isLoading.value = false;
     }
   }
 }
