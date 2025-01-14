@@ -7,9 +7,9 @@ class Moviescreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: Customdrawer(),
+      drawer: const Customdrawer(),
       appBar: AppBar(),
-      body: Center(child: Text("MOVIESCREEN")),
+      body: const Center(child: Text("MOVIESCREEN")),
     );
   }
 }

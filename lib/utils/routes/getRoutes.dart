@@ -7,7 +7,7 @@ class Getroutes {
   static const String moiveScreen = '/moviescreen';
 
   static final List<GetPage> routes = [
-    GetPage(name: homeScreen, page: () => Homescreen()),
+    GetPage(name: homeScreen, page: () => const Homescreen()),
     GetPage(name: moiveScreen, page: () => const Moviescreen()),
   ];
 }
